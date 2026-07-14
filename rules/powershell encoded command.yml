@@ -1,0 +1,26 @@
+title: PowerShell Encoded Command Detection
+id: 1d9d5d70-4d89-4d44-a93d-100000000001
+status: experimental
+description: Detects PowerShell executed with encoded commands.
+author: Edeh Joseph
+date: 2026-07-14
+
+logsource:
+  product: windows
+  service: powershell
+
+detection:
+  selection:
+    CommandLine|contains:
+      - "-enc"
+      - "-EncodedCommand"
+  condition: selection
+
+falsepositives:
+  - Legitimate administrative scripts
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1059.001

@@ -1,0 +1,27 @@
+title: Mimikatz Detection
+id: 1d9d5d70-4d89-4d44-a93d-100000000002
+status: experimental
+description: Detects common Mimikatz execution.
+author: Edeh Joseph
+date: 2026-07-14
+
+logsource:
+  product: windows
+
+detection:
+  selection:
+    Image|contains:
+      - "mimikatz"
+      - "sekurlsa"
+      - "lsadump"
+  condition: selection
+
+falsepositives:
+  - Security testing
+  - Red Team activity
+
+level: critical
+
+tags:
+  - attack.credential-access
+  - attack.t1003

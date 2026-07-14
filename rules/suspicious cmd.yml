@@ -1,0 +1,29 @@
+title: Suspicious Command Execution
+id: 1d9d5d70-4d89-4d44-a93d-100000000004
+status: experimental
+description: Detects suspicious Windows command-line usage.
+
+author: Edeh Joseph
+date: 2026-07-14
+
+logsource:
+  product: windows
+
+detection:
+  selection:
+    CommandLine|contains:
+      - "cmd.exe"
+      - "powershell"
+      - "whoami"
+      - "net user"
+      - "net localgroup"
+  condition: selection
+
+falsepositives:
+  - Administrative activity
+
+level: medium
+
+tags:
+  - attack.execution
+  - attack.t1059
